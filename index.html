@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ultimate Bible Quiz</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#eef1f5;color:#172033}
+.container{max-width:850px;margin:auto;padding:20px}
+.card{background:#fff;border:1px solid #cbd5e1;border-radius:14px;padding:25px;margin:18px 0;box-shadow:0 4px 15px rgba(0,0,0,.08)}
+h1{text-align:center;margin-bottom:5px}.sub{text-align:center;color:#666}
+input{width:100%;box-sizing:border-box;padding:14px;border:1px solid #ccc;border-radius:8px;font-size:16px}
+button{padding:13px 22px;border:0;border-radius:8px;background:#1d4ed8;color:#fff;font-weight:bold;font-size:16px;cursor:pointer;margin-top:15px}
+button:disabled{opacity:.6;cursor:not-allowed}
+.progress{height:10px;background:#ddd;border-radius:20px;overflow:hidden;margin:15px 0}.bar{height:100%;width:0;background:#222;transition:.3s}
+.option{display:block;width:100%;text-align:left;margin:10px 0;padding:14px;border:2px solid #475569;background:#fff;color:#111827;border-radius:9px;font-size:17px;font-weight:600;cursor:pointer}
+.option:hover:not(:disabled){border-color:#777}.correct{background:#dcfce7!important;border:3px solid #15803d!important;color:#14532d!important}.wrong{background:#fee2e2!important;border:3px solid #dc2626!important;color:#7f1d1d!important}
+.feedback{padding:12px;border-radius:8px;margin-top:12px;display:none}.feedback.show{display:block}.explain{background:#eef3ff}
+.hidden{display:none}.result{text-align:center;font-size:18px}.score{font-size:52px;font-weight:bold}
+@media(max-width:600px){.container{padding:12px}.card{padding:18px}h1{font-size:27px}}
+</style>
+</head>
+<body>
+<div class="container">
+<div id="start" class="card">
+<h1>The Ultimate Bible Quiz</h1>
+<p class="sub">50 Multiple-Choice Questions • Instant Marking</p>
+<input id="name" placeholder="Enter your full name">
+<button onclick="startQuiz()">Start Quiz</button>
+</div>
+<div id="quiz" class="hidden">
+<div class="card">
+<div><strong id="who"></strong><span style="float:right" id="count"></span></div>
+<div class="progress"><div class="bar" id="bar"></div></div>
+<div id="questionCard"></div>
+<button id="next" class="hidden" onclick="nextQuestion()">Next Question</button>
+</div>
+</div>
+<div id="result" class="card hidden result"></div>
+</div>
+<script>
+const questions=[
+["Who built the ark?","Noah","Moses","Abraham","David",0],
+["What is the first book of the Bible?","Genesis","Exodus","Matthew","Psalms",0],
+["Who led the Israelites out of Egypt?","Joshua","Moses","Aaron","Joseph",1],
+["How many disciples did Jesus choose?","10","12","7","40",1],
+["Who killed Goliath?","Saul","David","Jonathan","Solomon",1],
+["Where was Jesus born?","Nazareth","Jerusalem","Bethlehem","Capernaum",2],
+["Who was swallowed by a great fish?","Jonah","Elijah","Peter","Job",0],
+["What was the name of Abraham's wife?","Rachel","Sarah","Rebekah","Leah",1],
+["Who interpreted Pharaoh's dreams in Egypt?","Daniel","Joseph","Moses","Jacob",1],
+["Which sea did the Israelites cross after leaving Egypt?","Dead Sea","Red Sea","Sea of Galilee","Mediterranean Sea",1],
+["Who received the Ten Commandments?","Moses","Aaron","Joshua","Samuel",0],
+["What was the name of the first man?","Adam","Abel","Abraham","Isaac",0],
+["What was the name of the first woman?","Eve","Sarah","Mary","Miriam",0],
+["Which disciple denied Jesus three times?","John","Peter","James","Andrew",1],
+["Who baptized Jesus?","Peter","John the Baptist","James","Paul",1],
+["How many days and nights did it rain during Noah's flood?","7","12","30","40",3],
+["Who was known for his great wisdom?","David","Solomon","Samuel","Hezekiah",1],
+["Which book comes immediately after the four Gospels?","Romans","Acts","Revelation","Hebrews",1],
+["Who wrote many of the letters in the New Testament?","Paul","Moses","Luke","Peter",0],
+["What was Paul's name before his conversion?","Saul","Simon","Silas","Stephen",0],
+["Who was the mother of Jesus?","Martha","Mary","Elizabeth","Anna",1],
+["What did Jesus turn water into?","Oil","Milk","Wine","Honey",2],
+["Who climbed a sycamore tree to see Jesus?","Zacchaeus","Nicodemus","Bartimaeus","Lazarus",0],
+["Who was raised from the dead after being in a tomb for four days?","Jairus","Stephen","Lazarus","Eutychus",2],
+["Which judge defeated the Midianites with 300 men?","Samson","Gideon","Jephthah","Deborah",1],
+["Who was thrown into a den of lions?","Daniel","Joseph","Jeremiah","Elijah",0],
+["Which prophet challenged the prophets of Baal on Mount Carmel?","Isaiah","Jeremiah","Elijah","Ezekiel",2],
+["What is the shortest verse in the Bible?","Pray without ceasing.","Jesus wept.","God is love.","Rejoice always.",1],
+["Who replaced Judas Iscariot among the twelve apostles?","Barnabas","Matthias","Silas","Timothy",1],
+["On what day did Jesus rise from the dead?","The first day of the week","The Sabbath","Friday evening","The Day of Atonement",0],
+["Who was the father of John the Baptist?","Zechariah","Simeon","Joseph","Cornelius",0],
+["What was the name of Moses' brother?","Aaron","Caleb","Joshua","Eli",0],
+["Who was sold into slavery by his brothers?","Benjamin","Joseph","Reuben","Isaac",1],
+["Which woman became queen and saved the Jewish people?","Ruth","Esther","Deborah","Hannah",1],
+["Who was Ruth's mother-in-law?","Miriam","Naomi","Elizabeth","Leah",1],
+["What was the name of the giant killed by David?","Goliath","Og","Absalom","Nabal",0],
+["Which city had walls that fell after the Israelites marched around it?","Jericho","Nineveh","Bethlehem","Damascus",0],
+["Who succeeded Moses as leader of Israel?","Joshua","Caleb","Aaron","Samuel",0],
+["What was Matthew's occupation before following Jesus?","Fisherman","Tax collector","Carpenter","Soldier",1],
+["Which apostle was known as the twin?","Thomas","Philip","Andrew","Bartholomew",0],
+["Who was the first Christian martyr recorded in Acts?","Stephen","James","Peter","Paul",0],
+["What was the name of the garden where Jesus prayed before His arrest?","Gethsemane","Eden","Jericho","Galilee",0],
+["Who betrayed Jesus for thirty pieces of silver?","Judas Iscariot","Peter","Herod","Pilate",0],
+["Who helped carry Jesus' cross?","Simon of Cyrene","Simon Peter","Nicodemus","Joseph of Arimathea",0],
+["Which book is the final book of the New Testament?","Revelation","Jude","Acts","Hebrews",0],
+["Who wrote the Book of Revelation according to its opening verse?","John","Paul","Peter","James",0],
+["How many books are in the Protestant Bible?","66","73","39","27",0],
+["Which Old Testament book is famous for songs and prayers?","Psalms","Proverbs","Job","Isaiah",0],
+["What was the name of the tower people built after the flood?","Tower of Babel","Tower of Jericho","Tower of Zion","Tower of Shinar",0]
+];
+let quiz=[],i=0,score=0,answered=false,player="";
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function startQuiz(){
+ player=document.getElementById('name').value.trim();
+ if(!player){alert('Please enter your name.');return}
+ quiz=shuffle(questions); document.getElementById('start').classList.add('hidden');
+ document.getElementById('quiz').classList.remove('hidden'); document.getElementById('who').textContent='Participant: '+player; render();
+}
+function render(){
+ answered=false; document.getElementById('next').classList.add('hidden');
+ let q=quiz[i], opts=[0,1,2,3].map(x=>({text:q[x+1],correct:x===q[5]})); opts=shuffle(opts);
+ document.getElementById('count').textContent=`Question ${i+1} of ${quiz.length}`;
+ document.getElementById('bar').style.width=`${(i/quiz.length)*100}%`;
+ document.getElementById('questionCard').innerHTML=`<h2>${q[0]}</h2>`+opts.map((o,n)=>`<button class="option" data-correct="${o.correct}" onclick="answer(this)">${'ABCD'[n]}. ${o.text}</button>`).join('')+`<div id="feedback" class="feedback explain"></div>`;
+}
+function answer(btn){
+ if(answered)return; answered=true;
+ let correct=btn.dataset.correct==="true", buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach(b=>{b.disabled=true;if(b.dataset.correct==="true")b.classList.add('correct')});
+ if(correct){score++; document.getElementById('feedback').textContent='✓ Correct!';}
+ else {btn.classList.add('wrong'); let c=buttons.find(b=>b.dataset.correct==="true").textContent; document.getElementById('feedback').textContent='✗ Not quite. Correct answer: '+c;}
+ document.getElementById('feedback').classList.add('show'); document.getElementById('next').classList.remove('hidden');
+}
+function nextQuestion(){i++; if(i<quiz.length)render(); else finish()}
+function finish(){
+ document.getElementById('quiz').classList.add('hidden'); let pct=Math.round(score/quiz.length*100);
+ let msg=pct>=80?'Excellent work!':pct>=60?'Good effort!': 'Keep studying and try again!';
+ document.getElementById('result').classList.remove('hidden');
+ document.getElementById('result').innerHTML=`<h1>Quiz Complete</h1><p><strong>${player}</strong></p><div class="score">${score}/${quiz.length}</div><p>${pct}%</p><p>${msg}</p><button onclick="location.reload()">Take Quiz Again</button>`;
+}
+</script>
+</body></html>
