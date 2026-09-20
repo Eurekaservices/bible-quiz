@@ -4,121 +4,1541 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ultimate Bible Quiz</title>
+
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#eef1f5;color:#172033}
-.container{max-width:850px;margin:auto;padding:20px}
-.card{background:#fff;border:1px solid #cbd5e1;border-radius:14px;padding:25px;margin:18px 0;box-shadow:0 4px 15px rgba(0,0,0,.08)}
-h1{text-align:center;margin-bottom:5px}.sub{text-align:center;color:#666}
-input{width:100%;box-sizing:border-box;padding:14px;border:1px solid #ccc;border-radius:8px;font-size:16px}
-button{padding:13px 22px;border:0;border-radius:8px;background:#1d4ed8;color:#fff;font-weight:bold;font-size:16px;cursor:pointer;margin-top:15px}
-button:disabled{opacity:.6;cursor:not-allowed}
-.progress{height:10px;background:#ddd;border-radius:20px;overflow:hidden;margin:15px 0}.bar{height:100%;width:0;background:#222;transition:.3s}
-.option{display:block;width:100%;text-align:left;margin:10px 0;padding:14px;border:2px solid #475569;background:#fff;color:#111827;border-radius:9px;font-size:17px;font-weight:600;cursor:pointer}
-.option:hover:not(:disabled){border-color:#777}.correct{background:#dcfce7!important;border:3px solid #15803d!important;color:#14532d!important}.wrong{background:#fee2e2!important;border:3px solid #dc2626!important;color:#7f1d1d!important}
-.feedback{padding:12px;border-radius:8px;margin-top:12px;display:none}.feedback.show{display:block}.explain{background:#eef3ff}
-.hidden{display:none}.result{text-align:center;font-size:18px}.score{font-size:52px;font-weight:bold}
-@media(max-width:600px){.container{padding:12px}.card{padding:18px}h1{font-size:27px}}
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#eef1f5;
+    color:#172033
+}
+
+.container{
+    max-width:850px;
+    margin:auto;
+    padding:20px
+}
+
+.card{
+    background:#fff;
+    border:1px solid #cbd5e1;
+    border-radius:14px;
+    padding:25px;
+    margin:18px 0;
+    box-shadow:0 4px 15px rgba(0,0,0,.08)
+}
+
+h1{
+    text-align:center;
+    margin-bottom:5px
+}
+
+.sub{
+    text-align:center;
+    color:#666
+}
+
+input{
+    width:100%;
+    box-sizing:border-box;
+    padding:14px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px
+}
+
+button{
+    padding:13px 22px;
+    border:0;
+    border-radius:8px;
+    background:#1d4ed8;
+    color:#fff;
+    font-weight:bold;
+    font-size:16px;
+    cursor:pointer;
+    margin-top:15px
+}
+
+button:disabled{
+    opacity:.6;
+    cursor:not-allowed
+}
+
+.progress{
+    height:10px;
+    background:#ddd;
+    border-radius:20px;
+    overflow:hidden;
+    margin:15px 0
+}
+
+.bar{
+    height:100%;
+    width:0;
+    background:#222;
+    transition:.3s
+}
+
+.option{
+    display:block;
+    width:100%;
+    text-align:left;
+    margin:10px 0;
+    padding:14px;
+    border:2px solid #475569;
+    background:#fff;
+    color:#111827;
+    border-radius:9px;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer
+}
+
+.option:hover:not(:disabled){
+    border-color:#777
+}
+
+.correct{
+    background:#dcfce7!important;
+    border:3px solid #15803d!important;
+    color:#14532d!important
+}
+
+.wrong{
+    background:#fee2e2!important;
+    border:3px solid #dc2626!important;
+    color:#7f1d1d!important
+}
+
+.feedback{
+    padding:12px;
+    border-radius:8px;
+    margin-top:12px;
+    display:none
+}
+
+.feedback.show{
+    display:block
+}
+
+.explain{
+    background:#eef3ff
+}
+
+.hidden{
+    display:none
+}
+
+.result{
+    text-align:center;
+    font-size:18px
+}
+
+.score{
+    font-size:52px;
+    font-weight:bold
+}
+
+.category{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:20px;
+    background:#e0e7ff;
+    color:#3730a3;
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:8px
+}
+
+@media(max-width:600px){
+    .container{
+        padding:12px
+    }
+
+    .card{
+        padding:18px
+    }
+
+    h1{
+        font-size:27px
+    }
+
+    .option{
+        font-size:16px
+    }
+}
 </style>
 </head>
+
 <body>
+
 <div class="container">
+
 <div id="start" class="card">
+
 <h1>The Ultimate Bible Quiz</h1>
-<p class="sub">50 Multiple-Choice Questions • Instant Marking</p>
-<input id="name" placeholder="Enter your full name">
-<button onclick="startQuiz()">Start Quiz</button>
+
+<p class="sub">
+70 Standard & Advanced Bible Questions
+</p>
+
+<p class="sub">
+People • Places • Statistics • Prophets • Kings • Apostles • Bible Puzzles
+</p>
+
+<input
+    id="name"
+    placeholder="Enter your full name"
+>
+
+<button onclick="startQuiz()">
+Start Quiz
+</button>
+
 </div>
+
+
 <div id="quiz" class="hidden">
+
 <div class="card">
-<div><strong id="who"></strong><span style="float:right" id="count"></span></div>
-<div class="progress"><div class="bar" id="bar"></div></div>
+
+<div>
+<strong id="who"></strong>
+<span style="float:right" id="count"></span>
+</div>
+
+<div class="progress">
+<div class="bar" id="bar"></div>
+</div>
+
 <div id="questionCard"></div>
-<button id="next" class="hidden" onclick="nextQuestion()">Next Question</button>
+
+<button
+    id="next"
+    class="hidden"
+    onclick="nextQuestion()"
+>
+Next Question
+</button>
+
 </div>
+
 </div>
+
+
 <div id="result" class="card hidden result"></div>
+
 </div>
+
+
 <script>
-const questions=[
-["Who built the ark?","Noah","Moses","Abraham","David",0],
-["What is the first book of the Bible?","Genesis","Exodus","Matthew","Psalms",0],
-["Who led the Israelites out of Egypt?","Joshua","Moses","Aaron","Joseph",1],
-["How many disciples did Jesus choose?","10","12","7","40",1],
-["Who killed Goliath?","Saul","David","Jonathan","Solomon",1],
-["Where was Jesus born?","Nazareth","Jerusalem","Bethlehem","Capernaum",2],
-["Who was swallowed by a great fish?","Jonah","Elijah","Peter","Job",0],
-["What was the name of Abraham's wife?","Rachel","Sarah","Rebekah","Leah",1],
-["Who interpreted Pharaoh's dreams in Egypt?","Daniel","Joseph","Moses","Jacob",1],
-["Which sea did the Israelites cross after leaving Egypt?","Dead Sea","Red Sea","Sea of Galilee","Mediterranean Sea",1],
-["Who received the Ten Commandments?","Moses","Aaron","Joshua","Samuel",0],
-["What was the name of the first man?","Adam","Abel","Abraham","Isaac",0],
-["What was the name of the first woman?","Eve","Sarah","Mary","Miriam",0],
-["Which disciple denied Jesus three times?","John","Peter","James","Andrew",1],
-["Who baptized Jesus?","Peter","John the Baptist","James","Paul",1],
-["How many days and nights did it rain during Noah's flood?","7","12","30","40",3],
-["Who was known for his great wisdom?","David","Solomon","Samuel","Hezekiah",1],
-["Which book comes immediately after the four Gospels?","Romans","Acts","Revelation","Hebrews",1],
-["Who wrote many of the letters in the New Testament?","Paul","Moses","Luke","Peter",0],
-["What was Paul's name before his conversion?","Saul","Simon","Silas","Stephen",0],
-["Who was the mother of Jesus?","Martha","Mary","Elizabeth","Anna",1],
-["What did Jesus turn water into?","Oil","Milk","Wine","Honey",2],
-["Who climbed a sycamore tree to see Jesus?","Zacchaeus","Nicodemus","Bartimaeus","Lazarus",0],
-["Who was raised from the dead after being in a tomb for four days?","Jairus","Stephen","Lazarus","Eutychus",2],
-["Which judge defeated the Midianites with 300 men?","Samson","Gideon","Jephthah","Deborah",1],
-["Who was thrown into a den of lions?","Daniel","Joseph","Jeremiah","Elijah",0],
-["Which prophet challenged the prophets of Baal on Mount Carmel?","Isaiah","Jeremiah","Elijah","Ezekiel",2],
-["What is the shortest verse in the Bible?","Pray without ceasing.","Jesus wept.","God is love.","Rejoice always.",1],
-["Who replaced Judas Iscariot among the twelve apostles?","Barnabas","Matthias","Silas","Timothy",1],
-["On what day did Jesus rise from the dead?","The first day of the week","The Sabbath","Friday evening","The Day of Atonement",0],
-["Who was the father of John the Baptist?","Zechariah","Simeon","Joseph","Cornelius",0],
-["What was the name of Moses' brother?","Aaron","Caleb","Joshua","Eli",0],
-["Who was sold into slavery by his brothers?","Benjamin","Joseph","Reuben","Isaac",1],
-["Which woman became queen and saved the Jewish people?","Ruth","Esther","Deborah","Hannah",1],
-["Who was Ruth's mother-in-law?","Miriam","Naomi","Elizabeth","Leah",1],
-["What was the name of the giant killed by David?","Goliath","Og","Absalom","Nabal",0],
-["Which city had walls that fell after the Israelites marched around it?","Jericho","Nineveh","Bethlehem","Damascus",0],
-["Who succeeded Moses as leader of Israel?","Joshua","Caleb","Aaron","Samuel",0],
-["What was Matthew's occupation before following Jesus?","Fisherman","Tax collector","Carpenter","Soldier",1],
-["Which apostle was known as the twin?","Thomas","Philip","Andrew","Bartholomew",0],
-["Who was the first Christian martyr recorded in Acts?","Stephen","James","Peter","Paul",0],
-["What was the name of the garden where Jesus prayed before His arrest?","Gethsemane","Eden","Jericho","Galilee",0],
-["Who betrayed Jesus for thirty pieces of silver?","Judas Iscariot","Peter","Herod","Pilate",0],
-["Who helped carry Jesus' cross?","Simon of Cyrene","Simon Peter","Nicodemus","Joseph of Arimathea",0],
-["Which book is the final book of the New Testament?","Revelation","Jude","Acts","Hebrews",0],
-["Who wrote the Book of Revelation according to its opening verse?","John","Paul","Peter","James",0],
-["How many books are in the Protestant Bible?","66","73","39","27",0],
-["Which Old Testament book is famous for songs and prayers?","Psalms","Proverbs","Job","Isaiah",0],
-["What was the name of the tower people built after the flood?","Tower of Babel","Tower of Jericho","Tower of Zion","Tower of Shinar",0]
+
+const questions = [
+
+/* =========================
+   PEOPLE AND NAMES
+========================= */
+
+{
+question:"Which king of Judah was eight years old when he began to reign?",
+options:[
+"Josiah",
+"Joash",
+"Manasseh",
+"Uzziah"
+],
+correct:0,
+category:"People & Kings"
+},
+
+{
+question:"Who was the father of King Solomon?",
+options:[
+"Saul",
+"David",
+"Jesse",
+"Rehoboam"
+],
+correct:1,
+category:"People & Kings"
+},
+
+{
+question:"Which prophet confronted King David after his sin with Bathsheba?",
+options:[
+"Elijah",
+"Samuel",
+"Nathan",
+"Gad"
+],
+correct:2,
+category:"Prophets"
+},
+
+{
+question:"Who was the first king of Israel?",
+options:[
+"David",
+"Saul",
+"Solomon",
+"Jeroboam"
+],
+correct:1,
+category:"People & Kings"
+},
+
+{
+question:"Which judge of Israel made a vow that resulted in the sacrifice of his daughter?",
+options:[
+"Gideon",
+"Jephthah",
+"Samson",
+"Ehud"
+],
+correct:1,
+category:"Judges"
+},
+
+{
+question:"Who was the left-handed judge who killed King Eglon of Moab?",
+options:[
+"Ehud",
+"Shamgar",
+"Othniel",
+"Barak"
+],
+correct:0,
+category:"Judges"
+},
+
+{
+question:"Which woman killed Sisera by driving a tent peg through his head?",
+options:[
+"Deborah",
+"Jael",
+"Ruth",
+"Abigail"
+],
+correct:1,
+category:"Women of the Bible"
+},
+
+{
+question:"Who was the father of King Saul?",
+options:[
+"Jesse",
+"Abner",
+"Kish",
+"Jonathan"
+],
+correct:2,
+category:"People & Kings"
+},
+
+{
+question:"Which priest discovered the Book of the Law during the reign of Josiah?",
+options:[
+"Hilkiah",
+"Abiathar",
+"Zadok",
+"Jehoiada"
+],
+correct:0,
+category:"Priests"
+},
+
+{
+question:"Which prophet was commanded by God to marry Gomer?",
+options:[
+"Isaiah",
+"Jeremiah",
+"Hosea",
+"Amos"
+],
+correct:2,
+category:"Prophets"
+},
+
+{
+question:"Which prophet saw a valley filled with dry bones?",
+options:[
+"Isaiah",
+"Ezekiel",
+"Daniel",
+"Jeremiah"
+],
+correct:1,
+category:"Prophets"
+},
+
+{
+question:"Which prophet was swallowed by a great fish?",
+options:[
+"Jonah",
+"Amos",
+"Micah",
+"Nahum"
+],
+correct:0,
+category:"Prophets"
+},
+
+{
+question:"Which prophet challenged the prophets of Baal on Mount Carmel?",
+options:[
+"Elijah",
+"Elisha",
+"Isaiah",
+"Jeremiah"
+],
+correct:0,
+category:"Prophets"
+},
+
+{
+question:"Who succeeded Elijah as prophet?",
+options:[
+"Elisha",
+"Jeremiah",
+"Samuel",
+"Zechariah"
+],
+correct:0,
+category:"Prophets"
+},
+
+{
+question:"Which prophet saw the Lord sitting upon a throne, high and lifted up?",
+options:[
+"Isaiah",
+"Ezekiel",
+"Daniel",
+"Habakkuk"
+],
+correct:0,
+category:"Prophets"
+},
+
+{
+question:"Which prophet interpreted Nebuchadnezzar's dream of the great statue?",
+options:[
+"Jeremiah",
+"Ezekiel",
+"Daniel",
+"Zechariah"
+],
+correct:2,
+category:"Prophets"
+},
+
+{
+question:"Which Babylonian king saw the writing on the wall during a feast?",
+options:[
+"Nebuchadnezzar",
+"Belshazzar",
+"Darius",
+"Cyrus"
+],
+correct:1,
+category:"Kings"
+},
+
+{
+question:"Who interpreted the writing on the wall for Belshazzar?",
+options:[
+"Ezra",
+"Daniel",
+"Nehemiah",
+"Ezekiel"
+],
+correct:1,
+category:"People"
+},
+
+{
+question:"Which king allowed the Jews to return to Jerusalem after the Babylonian exile?",
+options:[
+"Cyrus",
+"Darius",
+"Artaxerxes",
+"Xerxes"
+],
+correct:0,
+category:"Kings"
+},
+
+{
+question:"Which queen risked her life by approaching King Ahasuerus without being summoned?",
+options:[
+"Esther",
+"Vashti",
+"Ruth",
+"Bathsheba"
+],
+correct:0,
+category:"Women of the Bible"
+},
+
+/* =========================
+   PLACES
+========================= */
+
+{
+question:"What was Esther's Hebrew name?",
+options:[
+"Hadassah",
+"Naomi",
+"Abigail",
+"Miriam"
+],
+correct:0,
+category:"People & Names"
+},
+
+{
+question:"Which man rebuilt the walls of Jerusalem after the exile?",
+options:[
+"Ezra",
+"Nehemiah",
+"Zerubbabel",
+"Joshua"
+],
+correct:1,
+category:"People & Places"
+},
+
+{
+question:"Which scribe led a group of exiles back to Jerusalem and taught them the Law?",
+options:[
+"Ezra",
+"Nehemiah",
+"Haggai",
+"Malachi"
+],
+correct:0,
+category:"People"
+},
+
+{
+question:"Which city was known as the place where David first reigned as king over Judah?",
+options:[
+"Jerusalem",
+"Hebron",
+"Bethlehem",
+"Beersheba"
+],
+correct:1,
+category:"Places"
+},
+
+{
+question:"Where did Abraham almost sacrifice Isaac?",
+options:[
+"Mount Sinai",
+"Mount Carmel",
+"Mount Moriah",
+"Mount Nebo"
+],
+correct:2,
+category:"Places"
+},
+
+{
+question:"Which city was destroyed together with Sodom?",
+options:[
+"Jericho",
+"Gomorrah",
+"Nineveh",
+"Shechem"
+],
+correct:1,
+category:"Places"
+},
+
+{
+question:"Which river did Naaman wash in to be healed of leprosy?",
+options:[
+"Jordan",
+"Jabbok",
+"Euphrates",
+"Kidron"
+],
+correct:0,
+category:"Places"
+},
+
+{
+question:"Which river did Moses' mother place him in a basket near?",
+options:[
+"Jordan",
+"Nile",
+"Euphrates",
+"Chebar"
+],
+correct:1,
+category:"Places"
+},
+
+{
+question:"On which mountain did Moses receive the Ten Commandments?",
+options:[
+"Mount Carmel",
+"Mount Nebo",
+"Mount Sinai",
+"Mount Zion"
+],
+correct:2,
+category:"Places"
+},
+
+{
+question:"From which mountain did Moses view the Promised Land before he died?",
+options:[
+"Mount Sinai",
+"Mount Nebo",
+"Mount Carmel",
+"Mount Tabor"
+],
+correct:1,
+category:"Places"
+},
+
+{
+question:"Which city did the Israelites march around for seven days before its walls fell?",
+options:[
+"Jericho",
+"Ai",
+"Bethel",
+"Hebron"
+],
+correct:0,
+category:"Places"
+},
+
+{
+question:"Which city did Joshua attack after the victory at Jericho but initially suffer defeat?",
+options:[
+"Ai",
+"Bethel",
+"Gibeon",
+"Shechem"
+],
+correct:0,
+category:"Places"
+},
+
+/* =========================
+   BIBLE STATISTICS
+========================= */
+
+{
+question:"How many spies did Moses send to explore the land of Canaan?",
+options:[
+"10",
+"12",
+"14",
+"70"
+],
+correct:1,
+category:"Bible Statistics"
+},
+
+{
+question:"How many of the twelve spies gave a favorable report about the Promised Land?",
+options:[
+"2",
+"4",
+"10",
+"12"
+],
+correct:0,
+category:"Bible Statistics"
+},
+
+{
+question:"How many years did the Israelites wander in the wilderness?",
+options:[
+"12",
+"20",
+"40",
+"70"
+],
+correct:2,
+category:"Bible Statistics"
+},
+
+{
+question:"How many tribes of Israel descended from Jacob?",
+options:[
+"10",
+"12",
+"13",
+"14"
+],
+correct:1,
+category:"Bible Statistics"
+},
+
+{
+question:"How many sons did Jacob have?",
+options:[
+"10",
+"11",
+"12",
+"13"
+],
+correct:2,
+category:"Bible Statistics"
+},
+
+{
+question:"How many pieces of silver did Judas Iscariot receive for betraying Jesus?",
+options:[
+"20",
+"30",
+"40",
+"50"
+],
+correct:1,
+category:"Bible Statistics"
+},
+
+{
+question:"How many days had Lazarus been in the tomb when Jesus arrived?",
+options:[
+"1",
+"2",
+"3",
+"4"
+],
+correct:3,
+category:"Bible Statistics"
+},
+
+{
+question:"How many baskets of fragments were collected after Jesus fed the five thousand?",
+options:[
+"5",
+"7",
+"12",
+"14"
+],
+correct:2,
+category:"Bible Statistics"
+},
+
+{
+question:"How many baskets of fragments were collected after Jesus fed the four thousand?",
+options:[
+"5",
+"7",
+"12",
+"14"
+],
+correct:1,
+category:"Bible Statistics"
+},
+
+{
+question:"How many people were gathered in the upper room after the ascension of Jesus, according to Acts 1?",
+options:[
+"70",
+"100",
+"120",
+"144"
+],
+correct:2,
+category:"Bible Statistics"
+},
+
+{
+question:"How many churches received specific messages in the opening chapters of Revelation?",
+options:[
+"5",
+"6",
+"7",
+"12"
+],
+correct:2,
+category:"Bible Statistics"
+},
+
+{
+question:"How many elders are described around God's throne in Revelation?",
+options:[
+"12",
+"24",
+"70",
+"144"
+],
+correct:1,
+category:"Bible Statistics"
+},
+
+{
+question:"How many living creatures are described around God's throne in Revelation?",
+options:[
+"2",
+"4",
+"7",
+"12"
+],
+correct:1,
+category:"Bible Statistics"
+},
+
+{
+question:"How many books are in the Protestant Bible?",
+options:[
+"60",
+"66",
+"70",
+"73"
+],
+correct:1,
+category:"Bible Statistics"
+},
+
+{
+question:"How many books are in the New Testament?",
+options:[
+"27",
+"30",
+"39",
+"66"
+],
+correct:0,
+category:"Bible Statistics"
+},
+
+/* =========================
+   NEW TESTAMENT
+========================= */
+
+{
+question:"Who was the first person recorded in Acts as being martyred for his faith in Christ?",
+options:[
+"James",
+"Stephen",
+"Peter",
+"Philip"
+],
+correct:1,
+category:"New Testament"
+},
+
+{
+question:"Who was chosen to replace Judas Iscariot among the twelve apostles?",
+options:[
+"Barnabas",
+"Matthias",
+"Silas",
+"Justus"
+],
+correct:1,
+category:"New Testament"
+},
+
+{
+question:"Who was the Roman governor who questioned Jesus before His crucifixion?",
+options:[
+"Herod",
+"Felix",
+"Pontius Pilate",
+"Festus"
+],
+correct:2,
+category:"New Testament"
+},
+
+{
+question:"Which disciple was originally called Levi?",
+options:[
+"Matthew",
+"Mark",
+"Luke",
+"Thomas"
+],
+correct:0,
+category:"New Testament"
+},
+
+{
+question:"Which apostle was known as Didymus, meaning Twin?",
+options:[
+"Thomas",
+"Philip",
+"Andrew",
+"Bartholomew"
+],
+correct:0,
+category:"New Testament"
+},
+
+{
+question:"Which couple lied about the amount of money they had given to the church and died after being confronted by Peter?",
+options:[
+"Ananias and Sapphira",
+"Priscilla and Aquila",
+"Felix and Drusilla",
+"Herod and Bernice"
+],
+correct:0,
+category:"New Testament"
+},
+
+{
+question:"Which man did Philip meet on the road from Jerusalem to Gaza and explain Isaiah's prophecy to?",
+options:[
+"An Ethiopian official",
+"A Roman governor",
+"A Samaritan priest",
+"A Jewish Pharisee"
+],
+correct:0,
+category:"New Testament"
+},
+
+{
+question:"Which city was Paul travelling toward when Jesus appeared to him and changed the direction of his life?",
+options:[
+"Jerusalem",
+"Damascus",
+"Antioch",
+"Rome"
+],
+correct:1,
+category:"New Testament"
+},
+
+{
+question:"Who was Paul's companion who separated from him after a disagreement concerning John Mark?",
+options:[
+"Peter",
+"Barnabas",
+"Silas",
+"Timothy"
+],
+correct:1,
+category:"New Testament"
+},
+
+{
+question:"Which young man fell from a third-story window while Paul was preaching and was later restored to life?",
+options:[
+"Eutychus",
+"Tychicus",
+"Onesimus",
+"Epaphroditus"
+],
+correct:0,
+category:"New Testament"
+},
+
+{
+question:"Which woman in Philippi was a seller of purple cloth and became one of the first recorded converts in Europe?",
+options:[
+"Priscilla",
+"Lydia",
+"Phoebe",
+"Junia"
+],
+correct:1,
+category:"New Testament"
+},
+
+{
+question:"Which man was a tentmaker who worked alongside Paul?",
+options:[
+"Aquila",
+"Apollos",
+"Silas",
+"Titus"
+],
+correct:0,
+category:"New Testament"
+},
+
+{
+question:"Which city was Paul visiting when he spoke at the Areopagus and addressed the Athenians?",
+options:[
+"Corinth",
+"Ephesus",
+"Athens",
+"Philippi"
+],
+correct:2,
+category:"New Testament"
+},
+
+{
+question:"Which church in Revelation was described as being lukewarm?",
+options:[
+"Smyrna",
+"Laodicea",
+"Pergamum",
+"Sardis"
+],
+correct:1,
+category:"Revelation"
+},
+
+{
+question:"Which church in Revelation was told that it had left its first love?",
+options:[
+"Ephesus",
+"Philadelphia",
+"Thyatira",
+"Smyrna"
+],
+correct:0,
+category:"Revelation"
+},
+
+/* =========================
+   TOUGHER STANDARD QUESTIONS
+========================= */
+
+{
+question:"Which king of Israel married Jezebel?",
+options:[
+"Jeroboam",
+"Omri",
+"Ahab",
+"Jehu"
+],
+correct:2,
+category:"Kings"
+},
+
+{
+question:"Who was Jezebel's father?",
+options:[
+"Ethbaal",
+"Ben-Hadad",
+"Omri",
+"Balak"
+],
+correct:0,
+category:"People"
+},
+
+{
+question:"Which king of Judah was struck with leprosy after attempting to burn incense in the Temple?",
+options:[
+"Hezekiah",
+"Uzziah",
+"Josiah",
+"Ahaz"
+],
+correct:1,
+category:"Kings"
+},
+
+{
+question:"Which king showed the Babylonian visitors all the treasures of his house, leading Isaiah to prophesy about the coming exile?",
+options:[
+"Hezekiah",
+"Josiah",
+"Manasseh",
+"Jehoiakim"
+],
+correct:0,
+category:"Kings"
+},
+
+{
+question:"Who was the father of John the Baptist?",
+options:[
+"Simeon",
+"Zechariah",
+"Joseph",
+"Joachim"
+],
+correct:1,
+category:"People"
+},
+
+{
+question:"What was the name of John the Baptist's mother?",
+options:[
+"Elizabeth",
+"Anna",
+"Martha",
+"Salome"
+],
+correct:0,
+category:"People"
+},
+
+{
+question:"Who was the Roman centurion whose servant Jesus healed?",
+options:[
+"Cornelius",
+"Jairus",
+"An unnamed centurion",
+"Longinus"
+],
+correct:2,
+category:"New Testament"
+},
+
+{
+question:"Who asked Pilate for the body of Jesus after the crucifixion?",
+options:[
+"Nicodemus",
+"Joseph of Arimathea",
+"Simon Peter",
+"Jairus"
+],
+correct:1,
+category:"New Testament"
+},
+
+{
+question:"Who brought spices with Nicodemus when preparing Jesus' body for burial?",
+options:[
+"Joseph of Arimathea",
+"Mary Magdalene",
+"Nicodemus",
+"John"
+],
+correct:2,
+category:"New Testament"
+},
+
+{
+question:"Which disciple was the brother of Peter?",
+options:[
+"Andrew",
+"James",
+"John",
+"Philip"
+],
+correct:0,
+category:"People"
+},
+
+/* =========================
+   BIBLE PUZZLES
+========================= */
+
+{
+question:"I was a shepherd, became a king, defeated a giant with a sling, and was known as a man after God's own heart. Who am I?",
+options:[
+"Saul",
+"David",
+"Samuel",
+"Jonathan"
+],
+correct:1,
+category:"Bible Puzzle"
+},
+
+{
+question:"I was sold by my brothers, taken to Egypt, imprisoned after being falsely accused, and later became second in command to Pharaoh. Who am I?",
+options:[
+"Benjamin",
+"Joseph",
+"Daniel",
+"Moses"
+],
+correct:1,
+category:"Bible Puzzle"
+},
+
+{
+question:"I was a queen who became famous for risking my life before a king in order to save my people. Who am I?",
+options:[
+"Ruth",
+"Esther",
+"Deborah",
+"Abigail"
+],
+correct:1,
+category:"Bible Puzzle"
+},
+
+{
+question:"I was thrown into a lions' den because I continued praying to God despite a royal decree. Who am I?",
+options:[
+"Jeremiah",
+"Daniel",
+"Ezekiel",
+"Nehemiah"
+],
+correct:1,
+category:"Bible Puzzle"
+},
+
+{
+question:"I was swallowed by a great fish after attempting to flee from God's command to preach to a foreign city. Who am I?",
+options:[
+"Jonah",
+"Elijah",
+"Amos",
+"Micah"
+],
+correct:0,
+category:"Bible Puzzle"
+},
+
+{
+question:"I was a tax collector who climbed a sycamore tree because I wanted to see Jesus. Who am I?",
+options:[
+"Matthew",
+"Zacchaeus",
+"Nicodemus",
+"Bartimaeus"
+],
+correct:1,
+category:"Bible Puzzle"
+},
+
+{
+question:"I denied Jesus three times before the rooster crowed, but later became a major leader of the early church. Who am I?",
+options:[
+"John",
+"Peter",
+"James",
+"Andrew"
+],
+correct:1,
+category:"Bible Puzzle"
+},
+
+{
+question:"I was a persecutor of Christians, encountered Jesus on the road to Damascus, and later became one of the greatest missionaries of the early church. Who am I?",
+options:[
+"Barnabas",
+"Paul",
+"Stephen",
+"Silas"
+],
+correct:1,
+category:"Bible Puzzle"
+},
+
+{
+question:"I was a judge of Israel who was known for extraordinary physical strength, but my strength was connected to my uncut hair. Who am I?",
+options:[
+"Gideon",
+"Samson",
+"Jephthah",
+"Ehud"
+],
+correct:1,
+category:"Bible Puzzle"
+},
+
+{
+question:"I was a prophet who challenged hundreds of prophets of Baal and later heard God's voice in a gentle whisper. Who am I?",
+options:[
+"Elijah",
+"Elisha",
+"Isaiah",
+"Jeremiah"
+],
+correct:0,
+category:"Bible Puzzle"
+}
+
 ];
-let quiz=[],i=0,score=0,answered=false,player="";
-function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+
+
+/* =========================
+   QUIZ VARIABLES
+========================= */
+
+let quiz = [];
+let i = 0;
+let score = 0;
+let answered = false;
+let player = "";
+
+
+/* =========================
+   START QUIZ
+========================= */
+
 function startQuiz(){
- player=document.getElementById('name').value.trim();
- if(!player){alert('Please enter your name.');return}
- quiz=shuffle(questions); document.getElementById('start').classList.add('hidden');
- document.getElementById('quiz').classList.remove('hidden'); document.getElementById('who').textContent='Participant: '+player; render();
+
+    player = document.getElementById("name").value.trim();
+
+    if(!player){
+        alert("Please enter your name.");
+        return;
+    }
+
+    /*
+    Questions are intentionally NOT randomized.
+    They will appear in the exact order
+    defined in the questions array.
+    */
+
+    quiz = [...questions];
+
+    i = 0;
+    score = 0;
+
+    document.getElementById("start").classList.add("hidden");
+
+    document.getElementById("quiz").classList.remove("hidden");
+
+    document.getElementById("who").textContent =
+        "Participant: " + player;
+
+    render();
 }
+
+
+/* =========================
+   RENDER QUESTION
+========================= */
+
 function render(){
- answered=false; document.getElementById('next').classList.add('hidden');
- let q=quiz[i], opts=[0,1,2,3].map(x=>({text:q[x+1],correct:x===q[5]})); opts=shuffle(opts);
- document.getElementById('count').textContent=`Question ${i+1} of ${quiz.length}`;
- document.getElementById('bar').style.width=`${(i/quiz.length)*100}%`;
- document.getElementById('questionCard').innerHTML=`<h2>${q[0]}</h2>`+opts.map((o,n)=>`<button class="option" data-correct="${o.correct}" onclick="answer(this)">${'ABCD'[n]}. ${o.text}</button>`).join('')+`<div id="feedback" class="feedback explain"></div>`;
+
+    answered = false;
+
+    document
+        .getElementById("next")
+        .classList
+        .add("hidden");
+
+    const q = quiz[i];
+
+    document.getElementById("count").textContent =
+        `Question ${i + 1} of ${quiz.length}`;
+
+    document.getElementById("bar").style.width =
+        `${((i) / quiz.length) * 100}%`;
+
+    const optionsHTML = q.options.map((option, index) => {
+
+        return `
+        <button
+            class="option"
+            data-correct="${index === q.correct}"
+            onclick="answer(this)"
+        >
+            ${"ABCD"[index]}. ${option}
+        </button>
+        `;
+
+    }).join("");
+
+    document.getElementById("questionCard").innerHTML = `
+
+        <div class="category">
+            ${q.category}
+        </div>
+
+        <h2>${q.question}</h2>
+
+        ${optionsHTML}
+
+        <div
+            id="feedback"
+            class="feedback explain"
+        ></div>
+
+    `;
 }
+
+
+/* =========================
+   ANSWER QUESTION
+========================= */
+
 function answer(btn){
- if(answered)return; answered=true;
- let correct=btn.dataset.correct==="true", buttons=[...document.querySelectorAll('.option')];
- buttons.forEach(b=>{b.disabled=true;if(b.dataset.correct==="true")b.classList.add('correct')});
- if(correct){score++; document.getElementById('feedback').textContent='✓ Correct!';}
- else {btn.classList.add('wrong'); let c=buttons.find(b=>b.dataset.correct==="true").textContent; document.getElementById('feedback').textContent='✗ Not quite. Correct answer: '+c;}
- document.getElementById('feedback').classList.add('show'); document.getElementById('next').classList.remove('hidden');
+
+    if(answered){
+        return;
+    }
+
+    answered = true;
+
+    const correct =
+        btn.dataset.correct === "true";
+
+    const buttons =
+        [...document.querySelectorAll(".option")];
+
+    buttons.forEach(button => {
+
+        button.disabled = true;
+
+        if(button.dataset.correct === "true"){
+            button.classList.add("correct");
+        }
+
+    });
+
+
+    const feedback =
+        document.getElementById("feedback");
+
+
+    if(correct){
+
+        score++;
+
+        feedback.textContent =
+            "✓ Correct!";
+
+    }else{
+
+        btn.classList.add("wrong");
+
+        const correctButton =
+            buttons.find(
+                button =>
+                button.dataset.correct === "true"
+            );
+
+        feedback.textContent =
+            "✗ Not quite. Correct answer: " +
+            correctButton.textContent;
+
+    }
+
+
+    feedback.classList.add("show");
+
+    const nextButton =
+        document.getElementById("next");
+
+    nextButton.classList.remove("hidden");
+
+
+    /*
+    Change the button text on the final question.
+    */
+
+    if(i === quiz.length - 1){
+
+        nextButton.textContent =
+            "View Final Score";
+
+    }else{
+
+        nextButton.textContent =
+            "Next Question";
+
+    }
+
 }
-function nextQuestion(){i++; if(i<quiz.length)render(); else finish()}
+
+
+/* =========================
+   NEXT QUESTION
+========================= */
+
+function nextQuestion(){
+
+    i++;
+
+    if(i < quiz.length){
+
+        render();
+
+    }else{
+
+        finish();
+
+    }
+
+}
+
+
+/* =========================
+   FINISH QUIZ
+========================= */
+
 function finish(){
- document.getElementById('quiz').classList.add('hidden'); let pct=Math.round(score/quiz.length*100);
- let msg=pct>=80?'Excellent work!':pct>=60?'Good effort!': 'Keep studying and try again!';
- document.getElementById('result').classList.remove('hidden');
- document.getElementById('result').innerHTML=`<h1>Quiz Complete</h1><p><strong>${player}</strong></p><div class="score">${score}/${quiz.length}</div><p>${pct}%</p><p>${msg}</p><button onclick="location.reload()">Take Quiz Again</button>`;
+
+    document
+        .getElementById("quiz")
+        .classList
+        .add("hidden");
+
+
+    const percentage =
+        Math.round(
+            (score / quiz.length) * 100
+        );
+
+
+    let message = "";
+
+    if(percentage >= 90){
+
+        message =
+            "Outstanding Bible knowledge!";
+
+    }else if(percentage >= 80){
+
+        message =
+            "Excellent performance!";
+
+    }else if(percentage >= 70){
+
+        message =
+            "Very good Bible knowledge!";
+
+    }else if(percentage >= 60){
+
+        message =
+            "Good effort! Keep studying the Word.";
+
+    }else if(percentage >= 50){
+
+        message =
+            "Fair performance. More Bible study will help.";
+
+    }else{
+
+        message =
+            "Keep studying and try again!";
+
+    }
+
+
+    const result =
+        document.getElementById("result");
+
+
+    result.classList.remove("hidden");
+
+
+    result.innerHTML = `
+
+        <h1>Quiz Complete</h1>
+
+        <p>
+            <strong>${player}</strong>
+        </p>
+
+        <div class="score">
+            ${score}/${quiz.length}
+        </div>
+
+        <p>
+            ${percentage}%
+        </p>
+
+        <p>
+            ${message}
+        </p>
+
+        <button onclick="location.reload()">
+            Take Quiz Again
+        </button>
+
+    `;
 }
+
 </script>
-</body></html>
+
+</body>
+</html>
