@@ -4,324 +4,228 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Ultimate Bible Book Challenge</title>
+<title>Bible Knowledge Challenge</title>
 
 <style>
-:root {
-    --primary: #263c72;
-    --secondary: #405da5;
-    --background: #f3f5fa;
-    --white: #ffffff;
-    --text: #202b40;
-    --muted: #69758a;
-    --green: #16834b;
-    --green-bg: #e6f6ed;
-    --red: #c43d43;
-    --red-bg: #fdebed;
-    --border: #e1e6ef;
-}
-
 * { box-sizing: border-box; }
 
 body {
     margin: 0;
     padding: 20px;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: var(--background);
-    font-family: Arial, Helvetica, sans-serif;
-    color: var(--text);
+    font-family: Arial, sans-serif;
+    background: #f1f4f8;
+    color: #202b3c;
 }
 
 .container {
-    width: 100%;
-    max-width: 720px;
-    background: var(--white);
-    border-radius: 16px;
-    padding: 35px;
-    box-shadow: 0 8px 35px rgba(25, 42, 80, 0.09);
+    max-width: 760px;
+    margin: 35px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 5px 25px rgba(0,0,0,.08);
 }
 
-.header {
+h1, h2 { text-align: center; }
+
+h1 { color: #183b65; }
+
+.subtitle {
     text-align: center;
-    margin-bottom: 28px;
-}
-
-.header h1 {
-    color: var(--primary);
-    font-size: 27px;
-    margin: 0 0 10px;
-}
-
-.header p {
-    color: var(--muted);
+    color: #64748b;
     line-height: 1.6;
-    margin: 0;
 }
 
-.screen { display: none; }
-.screen.active { display: block; }
-
-input[type="text"] {
+input {
     width: 100%;
-    padding: 15px;
-    border: 1px solid var(--border);
+    padding: 14px;
+    border: 1px solid #cbd5e1;
     border-radius: 8px;
-    font-size: 16px;
     margin: 15px 0;
-    outline: none;
+    font-size: 16px;
 }
-
-input[type="text"]:focus { border-color: var(--secondary); }
 
 button {
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 600;
     border: none;
     border-radius: 8px;
-    padding: 14px 20px;
-    transition: 0.2s;
+    padding: 13px 18px;
+    font-size: 15px;
+    cursor: pointer;
 }
 
-.primary-btn {
-    background: var(--primary);
+.primary {
+    background: #183b65;
     color: white;
     width: 100%;
+    font-weight: bold;
 }
 
-.primary-btn:hover { background: var(--secondary); }
+.primary:hover { background: #102b4b; }
 
-.secondary-btn {
-    background: #edf1fb;
-    color: var(--primary);
-    width: 100%;
-    margin-top: 12px;
-}
-
-.progress-section { margin-bottom: 25px; }
+.hidden { display: none; }
 
 .progress-info {
     display: flex;
     justify-content: space-between;
-    font-size: 13px;
-    color: var(--muted);
-    margin-bottom: 9px;
-}
-
-.progress-track {
-    height: 8px;
-    background: #e8ecf3;
-    border-radius: 20px;
-    overflow: hidden;
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 10px;
 }
 
 .progress-bar {
+    width: 100%;
+    height: 9px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+.progress {
     height: 100%;
-    width: 0;
-    background: var(--secondary);
-    transition: width 0.3s;
+    width: 0%;
+    background: #2563eb;
+    transition: width .3s;
 }
 
 .category {
     display: inline-block;
+    background: #e8eef8;
+    color: #183b65;
     padding: 6px 12px;
     border-radius: 20px;
-    background: #edf1fb;
-    color: var(--primary);
     font-size: 12px;
     font-weight: bold;
-    margin-bottom: 14px;
-}
-
-.question-number {
-    color: var(--muted);
-    font-size: 14px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .question {
     font-size: 20px;
-    line-height: 1.55;
-    font-weight: 600;
-    margin: 0 0 22px;
-}
-
-.options {
-    display: grid;
-    gap: 12px;
+    line-height: 1.6;
+    margin: 12px 0 22px;
 }
 
 .option {
+    display: block;
     width: 100%;
     text-align: left;
-    background: #f7f8fb;
-    color: var(--text);
-    border: 1px solid var(--border);
     padding: 15px;
-    font-weight: 500;
-    line-height: 1.4;
+    margin: 10px 0;
+    background: #f8fafc;
+    border: 1px solid #dbe2ea;
+    color: #202b3c;
+    border-radius: 8px;
+    font-size: 15px;
 }
 
 .option:hover:not(:disabled) {
-    border-color: var(--secondary);
-    background: #f0f3fc;
+    background: #edf3fb;
+    border-color: #7b9bc4;
 }
 
+.option:disabled { cursor: default; }
+
 .option.correct {
-    background: var(--green-bg);
-    color: var(--green);
-    border-color: var(--green);
+    background: #dcfce7;
+    border-color: #16a34a;
+    color: #166534;
 }
 
 .option.wrong {
-    background: var(--red-bg);
-    color: var(--red);
-    border-color: var(--red);
-}
-
-.option:disabled {
-    cursor: default;
-    opacity: 1;
+    background: #fee2e2;
+    border-color: #dc2626;
+    color: #991b1b;
 }
 
 .feedback {
-    display: none;
-    padding: 15px;
+    margin-top: 18px;
+    padding: 14px;
     border-radius: 8px;
-    margin-top: 20px;
     line-height: 1.5;
-    font-size: 14px;
+    display: none;
 }
 
-.feedback.show { display: block; }
-
 .feedback.correct-feedback {
-    background: var(--green-bg);
-    color: var(--green);
+    display: block;
+    background: #dcfce7;
+    color: #166534;
 }
 
 .feedback.wrong-feedback {
-    background: var(--red-bg);
-    color: var(--red);
+    display: block;
+    background: #fee2e2;
+    color: #991b1b;
 }
 
 .next-btn {
-    display: none;
-    width: 100%;
     margin-top: 20px;
-    background: var(--primary);
+    background: #183b65;
     color: white;
-}
-
-.next-btn.show { display: block; }
-
-.result { text-align: center; }
-
-.result h2 {
-    color: var(--primary);
-    font-size: 28px;
+    width: 100%;
+    display: none;
 }
 
 .score-circle {
-    width: 145px;
-    height: 145px;
-    border: 8px solid #e6eaf3;
-    border-top-color: var(--secondary);
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
+    background: #e8eef8;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 25px auto;
+    font-size: 30px;
+    font-weight: bold;
+    color: #183b65;
 }
 
-.score-circle strong {
-    font-size: 34px;
-    color: var(--primary);
+.result-text {
+    text-align: center;
+    line-height: 1.7;
 }
 
-.score-circle span {
-    color: var(--muted);
-    font-size: 13px;
+.result-stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 20px 0;
+    text-align: center;
 }
 
-.result-message {
-    color: var(--muted);
-    line-height: 1.6;
-    margin-bottom: 25px;
-}
-
-.result-details {
-    background: #f7f8fb;
-    padding: 18px;
-    border-radius: 10px;
-    margin-bottom: 25px;
-    text-align: left;
-    line-height: 2;
+.stat-number {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    color: #183b65;
 }
 
 .answer-key {
-    display: none;
     margin-top: 25px;
-    text-align: left;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 20px;
 }
 
-.answer-key.show { display: block; }
-
-.answer-key h3 {
-    color: var(--primary);
-    margin-bottom: 8px;
-}
-
-.answer-key-intro {
-    color: var(--muted);
-    font-size: 13px;
+.answer-key-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #e2e8f0;
     line-height: 1.5;
-    margin-bottom: 18px;
 }
 
-.answer-item {
-    padding: 14px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    margin-bottom: 10px;
-    line-height: 1.5;
-    background: #fff;
-}
+.answer-key-item strong { color: #183b65; }
 
-.answer-item strong {
-    display: block;
-    color: var(--primary);
-    margin-bottom: 5px;
-}
-
-.answer-item span {
-    display: block;
-    font-size: 14px;
-}
-
-.reference {
-    color: var(--green);
+.toggle-btn {
+    background: #e8eef8;
+    color: #183b65;
+    width: 100%;
+    margin-top: 20px;
     font-weight: bold;
-    margin-top: 5px;
 }
 
-@media (max-width: 600px) {
-    body {
-        padding: 12px;
-        align-items: flex-start;
-    }
-
-    .container {
-        padding: 23px 18px;
-        margin-top: 15px;
-    }
-
-    .header h1 { font-size: 23px; }
+@media(max-width: 600px) {
+    body { padding: 10px; }
+    .container { padding: 20px; margin: 15px auto; }
     .question { font-size: 18px; }
+    .result-stats { gap: 15px; }
 }
 </style>
 </head>
@@ -330,252 +234,237 @@ button {
 
 <div class="container">
 
-    <div class="header">
-        <h1>The Ultimate Bible Book Challenge</h1>
-        <p>Read the clues carefully. Think beyond what you already know. Can you identify the book of the Bible?</p>
-    </div>
-
-    <div id="startScreen" class="screen active">
-        <h2>Welcome, Bible Scholar!</h2>
-        <p>
-            You will face 50 challenging questions drawn from different
-            books of the Bible. Each question presents a scenario, event
-            or statement. Your task is to identify the correct book.
+    <section id="startScreen">
+        <h1>Bible Knowledge Challenge</h1>
+        <p class="subtitle">
+            50 questions. Multiple clues. One correct answer.
+            Test your understanding of Scripture and see how well
+            you can identify the books behind the events and teachings.
         </p>
-        <p><strong>Think carefully before choosing your answer.</strong></p>
 
         <input type="text" id="playerName" placeholder="Enter your name">
 
-        <button class="primary-btn" onclick="startQuiz()">Start Challenge</button>
-    </div>
+        <button class="primary" onclick="startQuiz()">Start Challenge</button>
+    </section>
 
-    <div id="quizScreen" class="screen">
+    <section id="quizScreen" class="hidden">
 
-        <div class="progress-section">
-            <div class="progress-info">
-                <span id="progressText">Question 1 of 50</span>
-                <span id="scoreText">Score: 0</span>
-            </div>
-            <div class="progress-track">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
+        <div class="progress-info">
+            <span id="questionCount"></span>
+            <span id="scoreDisplay">Score: 0</span>
         </div>
 
-        <div id="category" class="category"></div>
-        <div id="questionNumber" class="question-number"></div>
-        <div id="question" class="question"></div>
-        <div id="options" class="options"></div>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
 
-        <div id="feedback" class="feedback"></div>
+        <span class="category" id="category"></span>
 
-        <button id="nextBtn" class="next-btn" onclick="nextQuestion()">
+        <div class="question" id="questionText"></div>
+
+        <div id="options"></div>
+
+        <div class="feedback" id="feedback"></div>
+
+        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">
             Next Question
         </button>
 
-    </div>
+    </section>
 
-    <div id="resultScreen" class="screen result">
+    <section id="resultScreen" class="hidden">
 
-        <h2>Challenge Completed!</h2>
-        <p id="greeting"></p>
+        <h1>Challenge Completed!</h1>
 
-        <div class="score-circle">
-            <strong id="finalPercentage">0%</strong>
-            <span>Final Score</span>
+        <p class="result-text" id="greeting"></p>
+
+        <div class="score-circle" id="finalScore"></div>
+
+        <div class="result-stats">
+            <div>
+                <span class="stat-number" id="correctCount">0</span>
+                Correct
+            </div>
+            <div>
+                <span class="stat-number" id="wrongCount">0</span>
+                Incorrect
+            </div>
         </div>
 
-        <div class="result-details">
-            <div>Correct Answers: <strong id="correctCount"></strong></div>
-            <div>Wrong Answers: <strong id="wrongCount"></strong></div>
-            <div>Total Questions: <strong>50</strong></div>
-        </div>
+        <p class="result-text" id="performanceMessage"></p>
 
-        <p class="result-message" id="resultMessage"></p>
-
-        <button class="secondary-btn" onclick="toggleAnswerKey()">
+        <button class="toggle-btn" onclick="toggleAnswerKey()" id="answerKeyBtn">
             View Organiser's Answer Key
         </button>
 
-        <div id="answerKey" class="answer-key">
-            <h3>Organiser's Answer Key</h3>
-            <p class="answer-key-intro">
-                Each answer includes a Bible passage for verification.
-                References are based on the standard 66-book Protestant Bible.
-            </p>
-            <div id="answerKeyList"></div>
-        </div>
+        <div class="answer-key hidden" id="answerKey"></div>
 
-        <button class="primary-btn" onclick="restartQuiz()">
+        <button class="primary" style="margin-top:25px" onclick="restartQuiz()">
             Try Again
         </button>
 
-    </div>
+    </section>
 
 </div>
 
 <script>
-
-// Questions are deliberately mixed.
-// Old and New Testament questions appear throughout.
-// The order and answer options do not shuffle.
-
 const questions = [
 
 {
-category: "People and Relationships",
-question: "A prophet was instructed to marry a woman whose unfaithfulness would serve as a picture of how God's people had been unfaithful to Him. Which book contains this instruction?",
-options: ["Amos", "Hosea", "Micah", "Joel"],
+category: "Old Testament Insight",
+question: "A prophet was instructed to perform a symbolic act involving a domestic animal. His marriage and family life subsequently became part of a message about the relationship between God and an unfaithful people. Which book records this assignment?",
+options: ["Amos", "Hosea", "Micah", "Malachi"],
 correct: 1,
-reference: "Hosea 1:2–3"
+reference: "Hosea 1:2–3; 3:1–5"
 },
 
 {
-category: "Parables of Jesus",
-question: "A man was attacked by robbers and left half dead. Religious leaders passed by, but a traveller from a group often despised by the injured man's people stopped to help him. Which book records this parable?",
+category: "New Testament Insight",
+question: "A legal expert attempted to define the limits of his responsibility towards others. In response, he was given an account involving an injured traveller, two religious figures who passed by, and an unexpected helper. Which book records the discussion?",
 options: ["Matthew", "Mark", "Luke", "John"],
 correct: 2,
 reference: "Luke 10:25–37"
 },
 
 {
-category: "Family and Conflict",
-question: "Two brothers were born, but one came out holding the heel of the other. Years later, their family conflict involved a stolen blessing and a dramatic reunion. Which book contains their story?",
-options: ["Genesis", "Exodus", "Ruth", "1 Samuel"],
+category: "Biblical History",
+question: "Two brothers became central to a family conflict involving a birthright, a carefully arranged deception and a blessing that could not simply be withdrawn. Their eventual reunion took place after years of separation. Which book records these events?",
+options: ["Genesis", "Exodus", "Judges", "1 Samuel"],
 correct: 0,
-reference: "Genesis 25:24–26; Genesis 27; Genesis 33"
+reference: "Genesis 25:24–34; 27:1–40; 33:1–11"
 },
 
 {
-category: "The Nature of Christ",
-question: "A writer describes Christ as the image of the invisible God and the one through whom all things were created. Which book contains this description?",
-options: ["Hebrews", "John", "Colossians", "Romans"],
+category: "Christian Doctrine",
+question: "A letter explains that the visible and invisible realms owe their existence to one person. It further presents this person as existing before all things and holding creation together. Which book contains this teaching?",
+options: ["Hebrews", "Romans", "Colossians", "Ephesians"],
 correct: 2,
 reference: "Colossians 1:15–17"
 },
 
 {
-category: "Unusual Biblical Events",
-question: "During a midnight gathering, a young man fell asleep while a preacher continued speaking. He fell from a third-floor window, was picked up dead, and was later restored to life. Which book records this event?",
-options: ["Luke", "Romans", "Acts", "1 Corinthians"],
-correct: 2,
+category: "Early Church",
+question: "During a gathering that continued late into the night, a young listener fell from an upper-storey window while a visiting teacher was speaking. The gathering was interrupted, but the young man was later restored. Which book records this incident?",
+options: ["1 Corinthians", "Acts", "2 Corinthians", "Philippians"],
+correct: 1,
 reference: "Acts 20:7–12"
 },
 
 {
-category: "Poetry and Worship",
-question: "A writer describes God as a shepherd who provides, guides and protects. The passage also speaks of walking through the valley of the shadow of death. Which book contains this passage?",
-options: ["Proverbs", "Psalms", "Isaiah", "Job"],
-correct: 1,
+category: "Biblical Poetry",
+question: "A writer describes divine care through the language of provision, guidance, protection and hospitality. Even the possibility of danger does not remove his confidence in the one leading him. Which book contains this composition?",
+options: ["Proverbs", "Job", "Ecclesiastes", "Psalms"],
+correct: 3,
 reference: "Psalm 23:1–6"
 },
 
 {
-category: "Unusual Requests",
-question: "A military leader asked God for the sun and moon to stand still so that his army could finish defeating its enemies. Which book records this extraordinary request?",
-options: ["Deuteronomy", "Judges", "Joshua", "Numbers"],
+category: "Biblical History",
+question: "During a military campaign, a leader made an unusual request concerning the movement of the heavenly bodies. The account connects this event with an extended period of battle and a declaration about divine intervention. Which book records it?",
+options: ["Judges", "2 Kings", "Joshua", "1 Chronicles"],
 correct: 2,
 reference: "Joshua 10:12–14"
 },
 
 {
-category: "Encounters with Jesus",
-question: "A woman went to draw water from a well and encountered Jesus. Their conversation moved from ordinary drinking water to a discussion about living water and true worship. Which book records this encounter?",
-options: ["Matthew", "Luke", "John", "Acts"],
-correct: 2,
+category: "Encounter with Christ",
+question: "A conversation at a public water source moved from an ordinary request to a discussion about worship, spiritual understanding and the identity of the expected Messiah. Which book records the encounter?",
+options: ["Luke", "John", "Matthew", "Mark"],
+correct: 1,
 reference: "John 4:5–26"
 },
 
 {
-category: "Kings and Kingdoms",
-question: "During a royal feast, a mysterious hand appeared and wrote a message on a wall. The king became so frightened that his knees knocked together. Which book contains this account?",
-options: ["Daniel", "Esther", "Nehemiah", "2 Kings"],
+category: "Prophetic Revelation",
+question: "A ruler hosted a feast using sacred objects taken from another nation's place of worship. During the celebration, an unexplained message appeared on a wall, leaving the royal court terrified. Which book records the interpretation of that message?",
+options: ["Ezekiel", "Isaiah", "Jeremiah", "Daniel"],
+correct: 3,
+reference: "Daniel 5:1–6, 25–28"
+},
+
+{
+category: "Christian Living",
+question: "A congregation was challenged to consider whether a person's claims of belief could be separated from practical concern for someone lacking food and clothing. The writer used examples to show that belief without corresponding action is incomplete. Which book presents this argument?",
+options: ["James", "Galatians", "Romans", "Jude"],
 correct: 0,
-reference: "Daniel 5:5–6, 25–28"
+reference: "James 2:14–26"
 },
 
 {
-category: "Faith and Actions",
-question: "A writer challenges people who claim to have faith but refuse to help a brother or sister who lacks food and clothing. He argues that faith without works is dead. Which book contains this teaching?",
-options: ["Galatians", "James", "Jude", "1 John"],
-correct: 1,
-reference: "James 2:14–17, 26"
-},
-
-{
-category: "Prophetic Instructions",
-question: "A prophet was instructed to lie on one side for 390 days and on the other side for 40 days as a symbolic demonstration of the sins of Israel and Judah. Which book records this?",
-options: ["Jeremiah", "Isaiah", "Ezekiel", "Hosea"],
+category: "Prophetic Symbolism",
+question: "A prophet was given an unusual instruction involving the number of days he would lie on each side. His physical position was intended to communicate the consequences of the people's wrongdoing. Which book records this symbolic demonstration?",
+options: ["Jeremiah", "Hosea", "Ezekiel", "Zechariah"],
 correct: 2,
 reference: "Ezekiel 4:4–6"
 },
 
 {
-category: "The Birth of Jesus",
-question: "Visitors from the East followed a star, entered a house and presented gifts of gold, frankincense and myrrh to a child. Which book records this account?",
-options: ["Mark", "Luke", "Matthew", "John"],
-correct: 2,
-reference: "Matthew 2:1–11"
-},
-
-{
-category: "Trials and Suffering",
-question: "A righteous man lost his children, possessions and health. Throughout his suffering, a series of conversations explored whether suffering always means a person has done something wrong. Which book records this story?",
-options: ["Psalms", "Proverbs", "Job", "Ecclesiastes"],
-correct: 2,
-reference: "Job 1–2; Job 3–42"
-},
-
-{
-category: "Christian Character",
-question: "A writer lists love, joy, peace, patience, kindness, goodness, faithfulness, gentleness and self-control as qualities produced by the Spirit. Which book contains this list?",
-options: ["Ephesians", "Colossians", "Galatians", "Romans"],
-correct: 2,
-reference: "Galatians 5:22–23"
-},
-
-{
-category: "Prophets and Miracles",
-question: "A prophet challenged hundreds of prophets of another god to a contest. Both sides prepared sacrifices, but neither was allowed to set the fire themselves. Which book records this event?",
-options: ["Judges", "1 Kings", "2 Chronicles", "Malachi"],
+category: "Life of Christ",
+question: "Visitors from the East arrived in a political capital asking about the birth of a new king. Their investigation unsettled the reigning monarch, who later attempted to use their information for a different purpose. Which book records the account?",
+options: ["Luke", "Matthew", "John", "Mark"],
 correct: 1,
+reference: "Matthew 2:1–12"
+},
+
+{
+category: "Biblical History",
+question: "A man who had enjoyed considerable prosperity lost his possessions and family in a series of disasters. His friends attempted to explain his suffering, but their arguments did not provide the complete answer. Which book explores this experience?",
+options: ["Ecclesiastes", "Psalms", "Proverbs", "Job"],
+correct: 3,
+reference: "Job 1–2; 3–42"
+},
+
+{
+category: "Christian Doctrine",
+question: "A letter contrasts the desires of the sinful nature with the qualities produced by the Spirit. Rather than presenting these qualities as separate achievements, the writer groups them as evidence of a Spirit-led life. Which book contains this teaching?",
+options: ["Ephesians", "Colossians", "Galatians", "Philippians"],
+correct: 2,
+reference: "Galatians 5:16–25"
+},
+
+{
+category: "Prophetic Confrontation",
+question: "A national crisis was used to expose the inability of a popular religious system to answer a direct challenge. After an extended public contest, the response of the people changed dramatically. Which book records the event?",
+options: ["1 Kings", "2 Kings", "1 Samuel", "2 Chronicles"],
+correct: 0,
 reference: "1 Kings 18:20–39"
 },
 
 {
-category: "Miracles of Jesus",
-question: "A man had been buried for four days when Jesus arrived. Despite warnings about the smell, Jesus called him out of the tomb. Which book records this miracle?",
-options: ["Mark", "Matthew", "John", "Luke"],
-correct: 2,
+category: "Miracles of Christ",
+question: "A family sent word to a close friend about a serious illness. Although the response did not come immediately, the eventual arrival transformed a private family crisis into a public demonstration that caused many witnesses to believe. Which book records the event?",
+options: ["Matthew", "Luke", "Mark", "John"],
+correct: 3,
 reference: "John 11:1–44"
 },
 
 {
-category: "Loyalty and Family",
-question: "A widow refused to abandon her mother-in-law, declaring that her mother-in-law's people would become her people and her God would become her God. Which book records this statement?",
-options: ["Esther", "Judges", "Ruth", "Genesis"],
-correct: 2,
+category: "Loyalty and Commitment",
+question: "A woman faced the choice of returning to her former people or remaining with an older relative who had lost almost everything. Her decision was expressed through a commitment that went beyond family obligation. Which book records her declaration?",
+options: ["Esther", "Ruth", "Judges", "1 Samuel"],
+correct: 1,
 reference: "Ruth 1:16–17"
 },
 
 {
-category: "Spiritual Warfare",
-question: "Believers are instructed to put on a complete set of spiritual protection, including a helmet, shield, breastplate and sword. Which book contains this instruction?",
-options: ["Romans", "1 Peter", "Ephesians", "Hebrews"],
+category: "Christian Living",
+question: "A letter describes a believer's struggle using the imagery of protective equipment, including a shield, helmet and sword. The writer connects each item with a spiritual responsibility rather than physical warfare. Which book contains this teaching?",
+options: ["Hebrews", "2 Timothy", "Ephesians", "1 Peter"],
 correct: 2,
 reference: "Ephesians 6:10–17"
 },
 
 {
-category: "Bible Knowledge",
-question: "A group of people received a preacher's message eagerly, but they also examined the Scriptures daily to confirm whether what they heard was true. Which book mentions them?",
-options: ["Hebrews", "Galatians", "Acts", "Philippians"],
-correct: 2,
+category: "Early Church",
+question: "A group of listeners received a message from travelling preachers but did not accept it without examination. They regularly investigated the Scriptures to determine whether the teaching was accurate. Which book commends their approach?",
+options: ["Acts", "Romans", "1 Thessalonians", "2 Timothy"],
+correct: 0,
 reference: "Acts 17:10–12"
 },
 
 {
-category: "Faith and History",
-question: "A writer presents examples of people who trusted God, including those who left their homeland, faced danger and endured suffering because of their faith. Which book contains this account?",
+category: "Faith and Perseverance",
+question: "A chapter presents a series of individuals whose actions demonstrated confidence in promises they had not yet fully experienced. Some received remarkable victories, while others endured suffering without seeing the outcome they hoped for. Which book contains this account?",
 options: ["Romans", "Hebrews", "James", "1 Peter"],
 correct: 1,
 reference: "Hebrews 11:1–40"
@@ -583,240 +472,240 @@ reference: "Hebrews 11:1–40"
 
 {
 category: "Unexpected Deliverance",
-question: "During a terrible siege, four men with a skin disease discovered that the enemy camp had been abandoned. Their discovery brought good news to a starving city. Which book records this story?",
-options: ["1 Kings", "2 Kings", "Jeremiah", "Lamentations"],
-correct: 1,
+question: "During a severe national crisis, several men excluded from the city discovered that an enemy force had abandoned its camp. Their discovery eventually changed the circumstances of an entire population facing starvation. Which book records this event?",
+options: ["1 Kings", "Joshua", "2 Chronicles", "2 Kings"],
+correct: 3,
 reference: "2 Kings 7:3–16"
 },
 
 {
-category: "Christian Citizenship",
-question: "A writer reminds believers that their citizenship is in heaven and that they eagerly await the Saviour from there. Which book contains this statement?",
-options: ["Colossians", "Philippians", "1 Thessalonians", "2 Timothy"],
-correct: 1,
-reference: "Philippians 3:20"
+category: "Christian Identity",
+question: "A letter reminds its readers that their ultimate citizenship is not determined by their present earthly location. The statement appears while the writer is encouraging believers to maintain a particular pattern of life. Which book contains it?",
+options: ["Colossians", "Ephesians", "Philippians", "1 Peter"],
+correct: 2,
+reference: "Philippians 3:17–21"
 },
 
 {
-category: "People and Places",
-question: "A woman hid two men who had entered her city secretly. She covered them with stalks of flax on the roof and later helped them escape. Which book contains this account?",
-options: ["Ruth", "Joshua", "1 Samuel", "Exodus"],
-correct: 1,
-reference: "Joshua 2:1–6"
+category: "Biblical History",
+question: "A woman living within a fortified city protected two visiting men by concealing them beneath material spread out on her roof. Her decision was connected to what she had heard about the God of Israel. Which book records the incident?",
+options: ["Joshua", "Judges", "1 Samuel", "Ruth"],
+correct: 0,
+reference: "Joshua 2:1–21"
 },
 
 {
-category: "Warnings and Prophecy",
-question: "A writer warns about a coming rebellion and a figure described as the man of lawlessness, who will oppose and exalt himself above everything called God. Which book contains this warning?",
-options: ["1 Timothy", "2 Thessalonians", "Titus", "2 Peter"],
-correct: 1,
-reference: "2 Thessalonians 2:1–4"
+category: "End-Time Teaching",
+question: "A congregation became unsettled by claims that a significant event in the future had already taken place. The writer warned them about a rebellion and the appearance of a figure associated with opposition to God. Which book addresses the confusion?",
+options: ["1 Thessalonians", "2 Peter", "Revelation", "2 Thessalonians"],
+correct: 3,
+reference: "2 Thessalonians 2:1–12"
 },
 
 {
-category: "Prophetic Actions",
-question: "While his nation was under threat, a prophet was instructed to buy a field even though the land was about to be captured. The purchase was a sign of future restoration. Which book records this?",
-options: ["Isaiah", "Jeremiah", "Amos", "Zechariah"],
+category: "Prophetic Obedience",
+question: "A prophet was instructed to purchase a piece of land while his nation was facing invasion and imprisonment. The transaction appeared unreasonable under the circumstances, but it served as a sign of future restoration. Which book records this act?",
+options: ["Isaiah", "Jeremiah", "Ezekiel", "Daniel"],
 correct: 1,
 reference: "Jeremiah 32:6–15"
 },
 
 {
-category: "Warnings to Believers",
-question: "A writer warns that false teachers will secretly introduce destructive teachings and exploit people with fabricated stories. Which book contains this warning?",
-options: ["1 Peter", "2 Peter", "Jude", "2 Timothy"],
-correct: 1,
+category: "False Teaching",
+question: "A letter warns that some people would secretly introduce destructive teachings while exploiting others through carefully constructed words. The writer connects their conduct with serious consequences. Which book contains this warning?",
+options: ["2 Peter", "1 John", "Jude", "Titus"],
+correct: 0,
 reference: "2 Peter 2:1–3"
 },
 
 {
-category: "Prophecy and Strange Events",
-question: "A man was travelling to curse a nation, but his donkey suddenly spoke to him after seeing an angel standing in the road. Which book records this unusual encounter?",
-options: ["Leviticus", "Numbers", "Deuteronomy", "Exodus"],
-correct: 1,
+category: "Biblical History",
+question: "A traveller became angry when an animal repeatedly changed direction. The animal's unusual behaviour was connected to a spiritual encounter that its owner initially failed to recognise. Which book records the incident?",
+options: ["Deuteronomy", "Judges", "Numbers", "Exodus"],
+correct: 2,
 reference: "Numbers 22:21–35"
 },
 
 {
-category: "Suffering and Faith",
-question: "A writer speaks of a painful weakness that he repeatedly asked the Lord to remove. Instead of removing it, the Lord told him that His grace was sufficient. Which book contains this account?",
-options: ["Galatians", "2 Corinthians", "Philippians", "1 Timothy"],
-correct: 1,
+category: "Apostolic Experience",
+question: "A writer described an ongoing personal difficulty that he had repeatedly asked God to remove. Instead of receiving the requested removal, he received an explanation about the sufficiency of divine grace. Which book records this experience?",
+options: ["Romans", "Philippians", "Galatians", "2 Corinthians"],
+correct: 3,
 reference: "2 Corinthians 12:7–10"
 },
 
 {
 category: "Prophetic Lessons",
-question: "A prophet became angry because a plant that had provided him shade suddenly withered. God used the incident to teach him about compassion for a great city. Which book contains this account?",
-options: ["Jonah", "Nahum", "Obadiah", "Habakkuk"],
-correct: 0,
+question: "A man became deeply displeased when a source of shade disappeared. The incident was used to challenge his concern for his own comfort in contrast with God's concern for a large population. Which book records the lesson?",
+options: ["Amos", "Jonah", "Nahum", "Habakkuk"],
+correct: 1,
 reference: "Jonah 4:5–11"
 },
 
 {
-category: "Testing Spiritual Claims",
-question: "Believers are warned not to believe every spirit but to test the spirits to determine whether they are from God. Which book contains this instruction?",
-options: ["2 John", "Jude", "1 John", "James"],
-correct: 2,
-reference: "1 John 4:1"
+category: "Christian Discernment",
+question: "A short letter gives a warning that spiritual claims should not automatically be accepted simply because someone presents them as coming from God. It instructs readers to examine the source of such claims. Which book contains this instruction?",
+options: ["2 John", "Jude", "3 John", "1 John"],
+correct: 3,
+reference: "1 John 4:1–6"
 },
 
 {
-category: "Sacred Objects",
-question: "An entire army was defeated, and a sacred object was captured. When the news reached an elderly priest, he fell backwards from his seat, broke his neck and died. Which book records this event?",
-options: ["2 Samuel", "1 Samuel", "1 Kings", "2 Chronicles"],
-correct: 1,
+category: "Biblical History",
+question: "A priest received devastating news about a national defeat and the loss of a sacred object. The shock caused him to fall backwards from his seat, resulting in his death. Which book records the event?",
+options: ["1 Samuel", "2 Samuel", "1 Kings", "Judges"],
+correct: 0,
 reference: "1 Samuel 4:10–18"
 },
 
 {
-category: "Warnings to Believers",
-question: "A short letter warns its readers not to welcome or support anyone who does not remain in the teaching of Christ. Which book contains this warning?",
-options: ["1 John", "2 John", "3 John", "Jude"],
-correct: 1,
-reference: "2 John 1:9–11"
+category: "Christian Conduct",
+question: "A letter warns against offering hospitality or public endorsement to someone who deliberately rejects the teaching of Christ. The instruction is given in the context of protecting the community from false doctrine. Which book contains it?",
+options: ["3 John", "Jude", "2 John", "1 Timothy"],
+correct: 2,
+reference: "2 John 1:7–11"
 },
 
 {
-category: "Miracles",
-question: "A borrowed iron tool fell into a river while a group of men were cutting wood. A prophet threw a stick into the water, and the iron floated. Which book contains this miracle?",
-options: ["1 Kings", "2 Kings", "1 Chronicles", "Nehemiah"],
+category: "Miracles in Israel",
+question: "While a group of men were working near a river, a borrowed metal tool fell into the water. The owner was distressed because the item did not belong to him, but the incident ended with an unusual recovery. Which book records it?",
+options: ["1 Kings", "2 Kings", "Joshua", "2 Chronicles"],
 correct: 1,
 reference: "2 Kings 6:1–7"
 },
 
 {
-category: "Church and Unity",
-question: "A writer compares the church to a human body, explaining that it has many parts with different functions, yet all belong to one body. Which book contains this teaching?",
-options: ["Ephesians", "1 Corinthians", "Colossians", "Romans"],
-correct: 1,
+category: "Church Teaching",
+question: "A congregation is compared to a physical body in which different parts have different functions. The writer uses this illustration to challenge divisions and show why no member should consider another unnecessary. Which book contains the teaching?",
+options: ["Ephesians", "Romans", "Colossians", "1 Corinthians"],
+correct: 3,
 reference: "1 Corinthians 12:12–27"
 },
 
 {
-category: "Royal Intrigue",
-question: "A man plotted to destroy an entire people because one person refused to bow to him. However, a queen risked her life by approaching the king without an invitation. Which book tells this story?",
-options: ["Daniel", "Esther", "Nehemiah", "Ezra"],
-correct: 1,
-reference: "Esther 3:1–6; Esther 4:10–16; Esther 5:1–3"
+category: "Biblical History",
+question: "A royal official became increasingly hostile towards a particular group because one man refused to show him the honour he demanded. His personal resentment developed into a plan that threatened an entire population. Which book records the crisis and the intervention that followed?",
+options: ["Esther", "Daniel", "Nehemiah", "Ezra"],
+correct: 0,
+reference: "Esther 3:1–6; 4:10–16; 5:1–3"
 },
 
 {
-category: "Forgiveness and Restoration",
-question: "A prisoner writes to a Christian friend about receiving back a former servant, not merely as a servant but as a beloved brother. Which book contains this personal letter?",
-options: ["Titus", "Jude", "Philemon", "2 John"],
+category: "Christian Relationships",
+question: "A letter writer appeals to a fellow believer concerning a man who had previously been useful to him. Rather than demanding a response, he asks that the man be received on a different basis from his former status. Which book contains the appeal?",
+options: ["Titus", "2 Timothy", "Philemon", "Colossians"],
 correct: 2,
-reference: "Philemon 1:10–16"
+reference: "Philemon 1:8–18"
 },
 
 {
-category: "Prophetic Visions",
-question: "A prophet saw the Lord seated on a throne, while heavenly beings called out that He was holy. One of the beings touched the prophet's lips with a burning coal. Which book records this vision?",
-options: ["Jeremiah", "Isaiah", "Ezekiel", "Daniel"],
+category: "Prophetic Vision",
+question: "A prophet witnessed a heavenly scene involving a throne, attendants declaring divine holiness and an act in which a burning object was brought into contact with his mouth. The experience was followed by a question about who would carry a message. Which book records it?",
+options: ["Ezekiel", "Isaiah", "Jeremiah", "Daniel"],
 correct: 1,
-reference: "Isaiah 6:1–7"
+reference: "Isaiah 6:1–8"
 },
 
 {
 category: "Church Leadership",
-question: "A church member is criticised for loving to be first, refusing to welcome visiting believers and speaking maliciously against others. Which book contains this account?",
-options: ["2 John", "Jude", "3 John", "Philemon"],
-correct: 2,
+question: "A travelling teacher complained about a prominent member of a congregation who rejected the authority of others, spoke maliciously and refused to receive visiting believers. Which book exposes this behaviour?",
+options: ["1 John", "2 John", "Jude", "3 John"],
+correct: 3,
 reference: "3 John 1:9–10"
 },
 
 {
-category: "Consequences of Actions",
-question: "A man reached out to steady a sacred object being transported on a cart. He was immediately struck dead for touching it. Which book records this incident?",
-options: ["2 Samuel", "Exodus", "Numbers", "Judges"],
+category: "Biblical History",
+question: "During a religious procession, a man reached out to steady a sacred object being transported on a cart. His action, although apparently well-intentioned, resulted in a sudden and fatal judgement. Which book records the event?",
+options: ["2 Samuel", "1 Chronicles", "1 Kings", "2 Chronicles"],
 correct: 0,
-reference: "2 Samuel 6:6–7"
+reference: "2 Samuel 6:1–11"
 },
 
 {
-category: "Leadership in the Church",
-question: "A writer outlines the qualities expected of anyone who desires to serve as an overseer in the church, including being self-controlled and able to manage a household well. Which book contains these qualifications?",
-options: ["2 Timothy", "Titus", "1 Timothy", "Philemon"],
+category: "Church Leadership",
+question: "A letter outlines the character expected of someone who desires responsibility over a congregation. The requirements include self-control, a good reputation outside the church and the ability to manage a household well. Which book contains these qualifications?",
+options: ["Titus", "2 Timothy", "1 Timothy", "Hebrews"],
 correct: 2,
 reference: "1 Timothy 3:1–7"
 },
 
 {
-category: "Prophecy and Betrayal",
-question: "A prophet spoke of thirty pieces of silver being thrown into the house of the Lord and associated the money with the potter. Which book contains this prophecy?",
-options: ["Hosea", "Zechariah", "Joel", "Amos"],
+category: "Prophetic Symbolism",
+question: "A prophet described a transaction involving a specified amount of silver. The money was later thrown into a place associated with worship, and the event included a reference to a potter. Which book records this symbolic account?",
+options: ["Malachi", "Zechariah", "Haggai", "Micah"],
 correct: 1,
 reference: "Zechariah 11:12–13"
 },
 
 {
 category: "Scripture and Teaching",
-question: "A young minister is reminded that all Scripture is inspired by God and useful for teaching, correction and training in righteousness. Which book contains this statement?",
-options: ["1 Timothy", "2 Timothy", "Titus", "Hebrews"],
-correct: 1,
+question: "A young minister was encouraged to remain committed to what he had learned. The writer emphasised the value of sacred writings in preparing people for righteousness and equipping them for good works. Which book contains this instruction?",
+options: ["1 Timothy", "Titus", "Hebrews", "2 Timothy"],
+correct: 3,
 reference: "2 Timothy 3:14–17"
 },
 
 {
-category: "Wisdom",
-question: "An individual is advised to study a tiny creature that has no commander, overseer or ruler, yet prepares its food during harvest. Which book contains this advice?",
-options: ["Ecclesiastes", "Job", "Proverbs", "Song of Solomon"],
-correct: 2,
-reference: "Proverbs 6:6–8"
-},
-
-{
-category: "Giving and Worship",
-question: "A prophet challenged the people to bring their tithes into God's storehouse and spoke of blessings being poured out from heaven. Which book contains this message?",
-options: ["Haggai", "Malachi", "Zephaniah", "Habakkuk"],
-correct: 1,
-reference: "Malachi 3:8–10"
-},
-
-{
-category: "Christian Conduct",
-question: "A writer instructs older women to teach what is good and encourage younger women to live wisely and responsibly. Which book contains these instructions?",
-options: ["Titus", "Philemon", "James", "1 Timothy"],
+category: "Wisdom Literature",
+question: "A wisdom writer directs a lazy person to observe a small creature that has no visible commander or overseer, yet organises its work and prepares for future needs. Which book contains this lesson?",
+options: ["Proverbs", "Ecclesiastes", "Job", "Psalms"],
 correct: 0,
+reference: "Proverbs 6:6–11"
+},
+
+{
+category: "Prophetic Instruction",
+question: "A prophet accused a community of withholding what belonged to God. The people were challenged to bring their contributions into a designated storehouse, with a promise connected to divine provision. Which book contains this message?",
+options: ["Haggai", "Zechariah", "Malachi", "Amos"],
+correct: 2,
+reference: "Malachi 3:8–12"
+},
+
+{
+category: "Christian Living",
+question: "A letter gives instructions to older women concerning their conduct and influence within the community. They are encouraged to teach younger women how to develop responsible family and personal lives. Which book contains these instructions?",
+options: ["1 Timothy", "Titus", "2 Timothy", "1 Peter"],
+correct: 1,
 reference: "Titus 2:3–5"
 },
 
 {
-category: "Prophecy and Places",
-question: "A prophet identified a small town as the place from which a ruler would come, even though the town appeared insignificant among the clans of Judah. Which book contains this prophecy?",
-options: ["Micah", "Malachi", "Zephaniah", "Habakkuk"],
-correct: 0,
+category: "Messianic Prophecy",
+question: "A prophetic message identifies a relatively small settlement as the place from which a future ruler would emerge. The passage also describes this ruler's origins as extending far beyond the immediate generation. Which book contains this prophecy?",
+options: ["Isaiah", "Zechariah", "Malachi", "Micah"],
+correct: 3,
 reference: "Micah 5:2"
 },
 
 {
-category: "Spiritual Conflict",
-question: "A writer mentions a dispute between the archangel Michael and the devil concerning the body of Moses. Which book contains this unusual reference?",
-options: ["Revelation", "Hebrews", "Jude", "2 Peter"],
-correct: 2,
+category: "Biblical Revelation",
+question: "A short letter refers to a dispute between a heavenly messenger and the devil concerning the body of a prominent figure from Israel's history. The messenger does not pronounce a judgement on his own authority. Which book records this account?",
+options: ["Jude", "Revelation", "2 Peter", "Hebrews"],
+correct: 0,
 reference: "Jude 1:9"
 },
 
 {
-category: "Life and Wisdom",
-question: "A writer reflects on the seasons of human life and declares that there is a time for everything under heaven, including a time to be born and a time to die. Which book contains this reflection?",
-options: ["Psalms", "Proverbs", "Ecclesiastes", "Lamentations"],
+category: "Wisdom Literature",
+question: "A writer reflects on the changing seasons of human experience. Activities that appear contradictory are presented as having their appropriate moments within the broader course of life. Which book contains this reflection?",
+options: ["Job", "Proverbs", "Ecclesiastes", "Psalms"],
 correct: 2,
 reference: "Ecclesiastes 3:1–8"
 },
 
 {
-category: "The Return of Christ",
-question: "A writer explains that believers who have died will rise first when the Lord descends from heaven, and those still alive will be caught up together with them. Which book contains this teaching?",
-options: ["1 Thessalonians", "2 Thessalonians", "1 Corinthians", "Revelation"],
-correct: 0,
+category: "Future Hope",
+question: "A congregation was concerned about believers who had died before the return of Christ. The writer explained the order of events and reassured them that those who had died would not be disadvantaged. Which book contains this teaching?",
+options: ["2 Thessalonians", "1 Thessalonians", "1 Corinthians", "Revelation"],
+correct: 1,
 reference: "1 Thessalonians 4:13–18"
 },
 
 {
-category: "Visions and Revelation",
-question: "A vision describes a woman clothed with the sun, with the moon under her feet and a crown of twelve stars on her head. Which book contains this vision?",
-options: ["Daniel", "Ezekiel", "Isaiah", "Revelation"],
+category: "Prophetic Revelation",
+question: "A symbolic vision describes a woman, a child destined to rule the nations and a hostile creature waiting to destroy the child. The vision continues with a dramatic change in the child's location and the woman's circumstances. Which book records this vision?",
+options: ["Daniel", "Ezekiel", "Zechariah", "Revelation"],
 correct: 3,
 reference: "Revelation 12:1–6"
 }
@@ -826,109 +715,110 @@ reference: "Revelation 12:1–6"
 let currentQuestion = 0;
 let score = 0;
 let player = "";
+let answered = false;
+
+function showScreen(screenId) {
+    document.getElementById("startScreen").classList.add("hidden");
+    document.getElementById("quizScreen").classList.add("hidden");
+    document.getElementById("resultScreen").classList.add("hidden");
+    document.getElementById(screenId).classList.remove("hidden");
+}
 
 function startQuiz() {
-    const nameInput = document.getElementById("playerName");
-    player = nameInput.value.trim();
+    const nameInput = document.getElementById("playerName").value.trim();
 
-    if (!player) {
+    if (!nameInput) {
         alert("Please enter your name before starting.");
-        nameInput.focus();
         return;
     }
 
+    player = nameInput;
     currentQuestion = 0;
     score = 0;
-
-    document.getElementById("answerKey").classList.remove("show");
 
     showScreen("quizScreen");
     renderQuestion();
 }
 
-function showScreen(screenId) {
-    document.querySelectorAll(".screen").forEach(screen => {
-        screen.classList.remove("active");
-    });
-
-    document.getElementById(screenId).classList.add("active");
-}
-
 function renderQuestion() {
+    answered = false;
+
     const q = questions[currentQuestion];
 
-    document.getElementById("progressText").textContent =
+    document.getElementById("questionCount").textContent =
         `Question ${currentQuestion + 1} of ${questions.length}`;
 
-    document.getElementById("scoreText").textContent =
+    document.getElementById("scoreDisplay").textContent =
         `Score: ${score}`;
 
-    document.getElementById("progressBar").style.width =
+    document.getElementById("progress").style.width =
         `${(currentQuestion / questions.length) * 100}%`;
 
     document.getElementById("category").textContent = q.category;
-    document.getElementById("questionNumber").textContent =
-        `QUESTION ${currentQuestion + 1}`;
-
-    document.getElementById("question").textContent = q.question;
+    document.getElementById("questionText").textContent = q.question;
 
     const optionsContainer = document.getElementById("options");
     optionsContainer.innerHTML = "";
 
     q.options.forEach((option, index) => {
         const button = document.createElement("button");
-
         button.className = "option";
-        button.textContent =
-            `${String.fromCharCode(65 + index)}. ${option}`;
-
+        button.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
         button.onclick = () => answerQuestion(index);
-
         optionsContainer.appendChild(button);
     });
 
     const feedback = document.getElementById("feedback");
     feedback.className = "feedback";
+    feedback.style.display = "none";
     feedback.textContent = "";
 
-    const nextBtn = document.getElementById("nextBtn");
-    nextBtn.classList.remove("show");
-
-    nextBtn.textContent =
-        currentQuestion === questions.length - 1
-            ? "View My Results"
-            : "Next Question";
+    document.getElementById("nextBtn").style.display = "none";
 }
 
 function answerQuestion(selectedIndex) {
+    if (answered) return;
+
+    answered = true;
+
     const q = questions[currentQuestion];
-    const options = document.querySelectorAll(".option");
+    const buttons = document.querySelectorAll(".option");
     const feedback = document.getElementById("feedback");
 
-    options.forEach(button => {
+    buttons.forEach((button, index) => {
         button.disabled = true;
+
+        if (index === q.correct) {
+            button.classList.add("correct");
+        }
+
+        if (index === selectedIndex && selectedIndex !== q.correct) {
+            button.classList.add("wrong");
+        }
     });
 
     if (selectedIndex === q.correct) {
         score++;
-        options[selectedIndex].classList.add("correct");
-
-        feedback.className = "feedback show correct-feedback";
+        feedback.className = "feedback correct-feedback";
         feedback.textContent =
             `Correct! The answer is ${q.options[q.correct]}.`;
     } else {
-        options[selectedIndex].classList.add("wrong");
-        options[q.correct].classList.add("correct");
-
-        feedback.className = "feedback show wrong-feedback";
+        feedback.className = "feedback wrong-feedback";
         feedback.textContent =
-            `Not quite! The correct answer is ${q.options[q.correct]}.`;
+            `Not quite. The correct answer is ${q.options[q.correct]}.`;
     }
 
-    document.getElementById("scoreText").textContent =
+    feedback.style.display = "block";
+
+    document.getElementById("scoreDisplay").textContent =
         `Score: ${score}`;
 
-    document.getElementById("nextBtn").classList.add("show");
+    document.getElementById("nextBtn").style.display = "block";
+
+    document.getElementById("nextBtn").textContent =
+        currentQuestion === questions.length - 1
+        ? "View Results"
+        : "Next Question";
 }
 
 function nextQuestion() {
@@ -942,90 +832,82 @@ function nextQuestion() {
 }
 
 function finishQuiz() {
+    showScreen("resultScreen");
+
     const percentage = Math.round((score / questions.length) * 100);
     const wrong = questions.length - score;
 
-    document.getElementById("progressBar").style.width = "100%";
+    document.getElementById("progress").style.width = "100%";
 
     document.getElementById("greeting").textContent =
-        `Well done, ${player}. You have completed the Bible Book Challenge!`;
+        `Well done, ${player}. You have completed the Bible Knowledge Challenge.`;
 
-    document.getElementById("finalPercentage").textContent =
+    document.getElementById("finalScore").textContent =
         `${percentage}%`;
 
     document.getElementById("correctCount").textContent = score;
     document.getElementById("wrongCount").textContent = wrong;
 
-    let message;
+    let message = "";
 
     if (percentage >= 90) {
-        message = "Outstanding! You have an excellent understanding of the Bible. Keep studying and growing.";
-    } else if (percentage >= 80) {
-        message = "Excellent performance! You know your Bible very well.";
-    } else if (percentage >= 70) {
-        message = "Very good! You have a strong foundation, but there is still more to discover.";
+        message = "Outstanding! You demonstrated excellent knowledge and understanding of Scripture.";
+    } else if (percentage >= 75) {
+        message = "Very good performance! You have a strong understanding of biblical accounts and teachings.";
     } else if (percentage >= 60) {
-        message = "Good effort! Keep reading and studying the Word.";
-    } else if (percentage >= 50) {
-        message = "Fair attempt. Don't be discouraged. Go back to the Scriptures and learn more.";
+        message = "Good effort! Keep studying and connecting the details in Scripture.";
+    } else if (percentage >= 40) {
+        message = "You are making progress. Spend more time reading and understanding the biblical passages.";
     } else {
-        message = "There is room to grow! Keep studying. Every question is an opportunity to learn.";
+        message = "There is room to improve. Keep studying Scripture, and do not be discouraged.";
     }
 
-    document.getElementById("resultMessage").textContent = message;
+    document.getElementById("performanceMessage").textContent = message;
 
     buildAnswerKey();
-    showScreen("resultScreen");
 }
 
 function buildAnswerKey() {
-    const list = document.getElementById("answerKeyList");
-    list.innerHTML = "";
+    const container = document.getElementById("answerKey");
+    container.innerHTML = "<h2>Organiser's Answer Key</h2>";
 
     questions.forEach((q, index) => {
         const item = document.createElement("div");
-        item.className = "answer-item";
+        item.className = "answer-key-item";
 
         const title = document.createElement("strong");
-        title.textContent = `Question ${index + 1}`;
+        title.textContent =
+            `Question ${index + 1}: ${q.options[q.correct]}`;
 
-        const answer = document.createElement("span");
-        answer.textContent = `Answer: ${q.options[q.correct]}`;
-
-        const reference = document.createElement("span");
-        reference.className = "reference";
+        const reference = document.createElement("div");
         reference.textContent = `Scripture: ${q.reference}`;
 
         item.appendChild(title);
-        item.appendChild(answer);
         item.appendChild(reference);
-
-        list.appendChild(item);
+        container.appendChild(item);
     });
 }
 
 function toggleAnswerKey() {
-    const answerKey = document.getElementById("answerKey");
-    const button = document.querySelector(".secondary-btn");
+    const key = document.getElementById("answerKey");
+    const button = document.getElementById("answerKeyBtn");
 
-    answerKey.classList.toggle("show");
+    key.classList.toggle("hidden");
 
-    button.textContent = answerKey.classList.contains("show")
-        ? "Hide Organiser's Answer Key"
-        : "View Organiser's Answer Key";
+    button.textContent = key.classList.contains("hidden")
+        ? "View Organiser's Answer Key"
+        : "Hide Organiser's Answer Key";
 }
 
 function restartQuiz() {
-    currentQuestion = 0;
-    score = 0;
+    document.getElementById("playerName").value = "";
+    document.getElementById("answerKey").classList.add("hidden");
 
-    document.getElementById("answerKey").classList.remove("show");
-    document.querySelector(".secondary-btn").textContent =
+    document.getElementById("answerKeyBtn").textContent =
         "View Organiser's Answer Key";
 
     showScreen("startScreen");
 }
-
 </script>
 
 </body>
